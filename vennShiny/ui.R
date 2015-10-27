@@ -8,8 +8,14 @@
 
 
     # Sidebar
-    SidebarLayout(
-
+    sidebarLayout(
+        sidebarLayout(
+            selectInput("kindvenn", "Choose the kind of plot:",
+                        choices = c("simple",
+                                    "proportional",
+                                    "network"))
+            # other input
+        ),
         # Show a plot
         mainPanel(
             plotOutput("vennPlot")
