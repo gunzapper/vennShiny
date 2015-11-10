@@ -4,9 +4,19 @@
  shinyUI(fluidPage(
 
      # title
-     titlePanel("Venn's Diagrams")
+     titlePanel("Venn's Diagrams"),
 
 
-    # Sidebar
-        # Show a plot
+     # Sidebar
+     sidebarLayout(
+       sidebarPanel(
+         selectInput("venntype", "Choose a type of graph:",
+                     choices = c("simple", "proportional", "bvenn"))
+       ),
+       
+      # Main Panel
+      mainPanel(
+        verbatimTextOutput("choice")
+      )
+   )
 ))
