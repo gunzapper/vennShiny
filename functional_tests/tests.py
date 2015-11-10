@@ -5,7 +5,7 @@ browser = webdriver.Firefox()
 # My work mate Valentina has heard about a new online
 # Venn's diagram application.
 # She goes to check out its home page
-browser.get('http://localhost:3698')
+browser.get('http://localhost:7606')
 
 # She notices the page title and header mention Venn's Diagram
 assert "Venn's" in browser.title
@@ -27,3 +27,6 @@ assert "Venn's" in browser.title
 # the page change with the new info
 
 # and updates the plots
+
+# at the end she close the browser
+browser.quit()
