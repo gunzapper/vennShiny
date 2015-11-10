@@ -1,32 +1,43 @@
 from selenium import webdriver
+import unittest
 
-browser = webdriver.Firefox()
+class NewVennDia(unittest.TestCase):
 
-# My work mate Valentina has heard about a new online
-# Venn's diagram application.
-# She goes to check out its home page
-browser.get('http://localhost:7606')
+    def setUp(self):
+        self.browser = webdriver.Firefox()
 
-# She notices the page title and header mention Venn's Diagram
-assert "Venn's" in browser.title
+    def tearDown(self):
+        self.browser.quit()
 
-# She is invited to choose the kind of venn's diagram.
+    def test_can_start_a_new_venn(self):
+        # My work mate Valentina has heard about a new online
+        # Venn's diagram application.
+        # She goes to check out its home page
+        self.browser.get('http://localhost:7606')
 
-# She looks that the page update its text with the choice done
+        # She notices the page title and header mention Venn's Diagram
+        self.assertIn("Venn's", self.browser.title)
+        self.fail('Finish the tests!')
 
-# Now she is invited to enter two or three excell files
+        # She is invited to choose the kind of venn's diagram.
 
-# She looks that the page charges the data of first excell
+        # She looks that the page update its text with the choice done
 
-# of the second
+        # Now she is invited to enter two or three excell files
 
-# She looks that the app shows a plot
+        # She looks that the page charges the data of first excell
 
-# she introduces the third excell
+        # of the second
 
-# the page change with the new info
+        # She looks that the app shows a plot
 
-# and updates the plots
+        # she introduces the third excell
 
-# at the end she close the browser
-browser.quit()
+        # the page change with the new info
+
+        # and updates the plots
+
+        # at the end she close the browser
+
+if __name__ == '__main__':
+    unittest.main(warnings='ignore')
