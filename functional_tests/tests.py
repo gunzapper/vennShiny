@@ -17,6 +17,8 @@ class NewVennDia(unittest.TestCase):
 
         # She notices the page title and header mention Venn's Diagram
         self.assertIn("Venn's", self.browser.title)
+        header_text = self.browser.find_element_by_tag_name('h2').text
+        self.assertIn("Venn's", header_text)
         self.fail('Finish the tests!')
 
         # She is invited to choose the kind of venn's diagram.
