@@ -1,10 +1,15 @@
-from selenium import webdriver
 import unittest
+
+from selenium import webdriver
+
 
 class NewVennDia(unittest.TestCase):
 
     def setUp(self):
         self.browser = webdriver.Firefox()
+        ## I need to wait sometime,
+        ## otherwise the tests are break
+        self.browser.implicitly_wait(3)
 
     def tearDown(self):
         self.browser.quit()
@@ -20,6 +25,10 @@ class NewVennDia(unittest.TestCase):
         header_text = self.browser.find_element_by_tag_name('h2').text
         self.assertIn("Venn's", header_text)
         self.fail('Finish the tests!')
+
+        # By default the choice is "simple"
+        choice_text = self.browser.find_element_by_id("choice").text
+        self.assertEqual(choice_text, "simple")
 
         # She is invited to choose the kind of venn's diagram.
 
