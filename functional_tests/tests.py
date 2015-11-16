@@ -7,8 +7,8 @@ class NewVennDia(unittest.TestCase):
 
     def setUp(self):
         self.browser = webdriver.Firefox()
-        ## I need to wait sometime,
-        ## otherwise the tests are break
+        # - I need to wait sometime,      -
+        # - otherwise the tests are break -
         self.browser.implicitly_wait(3)
 
     def tearDown(self):
@@ -24,11 +24,10 @@ class NewVennDia(unittest.TestCase):
         self.assertIn("Venn's", self.browser.title)
         header_text = self.browser.find_element_by_tag_name('h2').text
         self.assertIn("Venn's", header_text)
-        self.fail('Finish the tests!')
 
         # By default the choice is "simple"
         choice_text = self.browser.find_element_by_id("choice").text
-        self.assertEqual(choice_text, "simple")
+        self.assertEqual(choice_text, '[1] "simple"')
 
         # She is invited to choose the kind of venn's diagram.
 
@@ -49,6 +48,7 @@ class NewVennDia(unittest.TestCase):
         # and updates the plots
 
         # at the end she close the browser
+        self.fail('Finish the tests!')
 
 if __name__ == '__main__':
     unittest.main(warnings='ignore')
