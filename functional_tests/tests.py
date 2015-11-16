@@ -29,6 +29,13 @@ class NewVennDia(unittest.TestCase):
         choice_text = self.browser.find_element_by_id("choice").text
         self.assertEqual(choice_text, '[1] "simple"')
 
+        typeselect = self.browser.find_element_by_class_name(
+            "selectize-control"
+        )
+        typeselect_item = typeselect.find_element_by_class_name("item")
+        self.assertEqual(typeselect_item.text, "simple")
+        self.assertEqual(typeselect_item.get_attribute("data-value"), "simple")
+
         # She is invited to choose the kind of venn's diagram.
 
         # She looks that the page update its text with the choice done
