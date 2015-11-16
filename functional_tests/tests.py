@@ -1,6 +1,7 @@
 import unittest
 
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 
 
 class NewVennDia(unittest.TestCase):
@@ -9,10 +10,19 @@ class NewVennDia(unittest.TestCase):
         self.browser = webdriver.Firefox()
         # - I need to wait sometime,      -
         # - otherwise the tests are break -
-        self.browser.implicitly_wait(3)
+        self.browser.implicitly_wait(9)
 
     def tearDown(self):
         self.browser.quit()
+
+    def looking_for_choices(self, res, element):
+        """ This function tests the results of selcting venn diagram type"""
+        choice_text = self.browser.find_element_by_id("choice").text
+        self.assertEqual(choice_text, '[1] "{}"'.format(res))
+
+        item = element.find_element_by_class_name("item")
+        self.assertEqual(item.text, res)
+        self.assertEqual(item.get_attribute("data-value"), res)
 
     def test_can_start_a_new_venn(self):
         # My work mate Valentina has heard about a new online
@@ -26,19 +36,19 @@ class NewVennDia(unittest.TestCase):
         self.assertIn("Venn's", header_text)
 
         # By default the choice is "simple"
-        choice_text = self.browser.find_element_by_id("choice").text
-        self.assertEqual(choice_text, '[1] "simple"')
-
-        typeselect = self.browser.find_element_by_class_name(
+        self.typeselect = self.browser.find_element_by_class_name(
             "selectize-control"
         )
-        typeselect_item = typeselect.find_element_by_class_name("item")
-        self.assertEqual(typeselect_item.text, "simple")
-        self.assertEqual(typeselect_item.get_attribute("data-value"), "simple")
+
+        self.looking_for_choices("simple", self.typeselect)
 
         # She is invited to choose the kind of venn's diagram.
+        self.typeinput = self.typeselect.find_element_by_tag_name("input")
+        self.typeinput.send_keys(Keys.ARROW_DOWN)
+        self.typeinput.send_keys(Keys.ENTER)
 
         # She looks that the page update its text with the choice done
+        self.looking_for_choices("proportional", self.typeselect)
 
         # Now she is invited to enter two or three excell files
 
