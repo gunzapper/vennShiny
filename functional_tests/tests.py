@@ -1,7 +1,9 @@
 import unittest
+import time
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.action_chains import ActionChains
 
 
 class NewVennDia(unittest.TestCase):
@@ -11,6 +13,7 @@ class NewVennDia(unittest.TestCase):
         # - I need to wait sometime,      -
         # - otherwise the tests are break -
         self.browser.implicitly_wait(9)
+        self.action = ActionChains(self.browser)
 
     def tearDown(self):
         self.browser.quit()
@@ -44,11 +47,18 @@ class NewVennDia(unittest.TestCase):
 
         # She is invited to choose the kind of venn's diagram.
         self.typeinput = self.typeselect.find_element_by_tag_name("input")
-        self.typeinput.send_keys(Keys.ARROW_DOWN)
-        self.typeinput.send_keys(Keys.ENTER)
+        self.typeinput.send_keys(Keys.ARROW_DOWN, Keys.ENTER)
 
         # She looks that the page update its text with the choice done
         self.looking_for_choices("proportional", self.typeselect)
+
+        # She repeat again the choice
+        time.sleep(3)
+        self.action.move_to_element(self.typeselect.find_element_by_tag_name(
+            "input"
+        ))
+        self.typeinput.send_keys(Keys.ARROW_DOWN, Keys.ENTER)
+        self.looking_for_choices("bvenn", self.typeselect)
 
         # Now she is invited to enter two or three excell files
 
