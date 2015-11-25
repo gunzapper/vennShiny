@@ -53,10 +53,12 @@ class NewVennDia(unittest.TestCase):
         self.looking_for_choices("proportional", self.typeselect)
 
         # She repeat again the choice
+        self.action.send_keys(Keys.ENTER)
         time.sleep(3)
-        self.action.move_to_element(self.typeselect.find_element_by_tag_name(
-            "input"
-        ))
+        # self.action.move_to_element(self.typeselect.find_element_by_tag_name(
+        #    "input"
+        # )_)
+        self.typeinput = self.typeselect.find_element_by_tag_name("input")
         self.typeinput.send_keys(Keys.ARROW_DOWN, Keys.ENTER)
         self.looking_for_choices("bvenn", self.typeselect)
 
