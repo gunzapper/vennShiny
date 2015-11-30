@@ -43,6 +43,12 @@ class NewVennDia(unittest.TestCase):
         self.looking_for_choices("simple", self.typeselect)
 
         # She is invited to choose the kind of venn's diagram.
+        # - Note: I will have more labels
+        self.labels = self.browser.find_elements_by_tag_name("label")
+        self.assertTrue(
+            any(lab.text == "Choose a type of graph:" for lab in self.labels)
+        )
+
         self.typeinput = self.typeselect.find_element_by_tag_name("input")
         self.typeinput.send_keys(Keys.ARROW_DOWN)
         self.typeinput.send_keys(Keys.ENTER)

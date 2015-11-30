@@ -6,7 +6,8 @@ shinyServer(function(input, output) {
     switch(input$venntype,
            "simple" = "simple",
            "proportional" = "proportional",
-           "bvenn" = "bvenn")
+           "bvenn" = "bvenn")#,
+    #file1 <- input$file1
   })
 
   output$choice <- renderPrint({
