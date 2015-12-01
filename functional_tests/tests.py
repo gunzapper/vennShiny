@@ -57,6 +57,10 @@ class NewVennDia(unittest.TestCase):
         self.looking_for_choices("proportional", self.typeselect)
 
         # Now she is invited to enter two or three excell files
+        self.assertTrue(
+            any(lab.text == "Choose a file" for lab in self.labels)
+        )
+
 
         # She looks that the page charges the data of first excell
 
