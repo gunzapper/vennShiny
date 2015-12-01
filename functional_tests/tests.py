@@ -2,12 +2,13 @@ import unittest
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-
+from selenium.webdriver import ActionChains
 
 class NewVennDia(unittest.TestCase):
 
     def setUp(self):
         self.browser = webdriver.Firefox()
+        self.actionChains = ActionChains(self.browser)
         # - I need to wait sometime,      -
         # - otherwise the tests are break -
         self.browser.implicitly_wait(9)
@@ -43,7 +44,6 @@ class NewVennDia(unittest.TestCase):
         self.looking_for_choices("simple", self.typeselect)
 
         # She is invited to choose the kind of venn's diagram.
-        # - Note: I will have more labels
         self.labels = self.browser.find_elements_by_tag_name("label")
         self.assertTrue(
             any(lab.text == "Choose a type of graph:" for lab in self.labels)
@@ -61,6 +61,9 @@ class NewVennDia(unittest.TestCase):
             any(lab.text == "Choose a file" for lab in self.labels)
         )
 
+        # Now she inserts a file
+        self.choosefile1input = self.browser.find_element_by_id("file1")
+        self.actionChains.context_click(self.choosefile1input).perform()
 
         # She looks that the page charges the data of first excell
 
