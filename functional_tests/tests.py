@@ -2,13 +2,14 @@ import unittest
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver import ActionChains
+# from selenium.webdriver import ActionChains
+
 
 class NewVennDia(unittest.TestCase):
 
     def setUp(self):
         self.browser = webdriver.Firefox()
-        self.actionChains = ActionChains(self.browser)
+        # self.actionChains = ActionChains(self.browser)
         # - I need to wait sometime,      -
         # - otherwise the tests are break -
         self.browser.implicitly_wait(9)
@@ -63,7 +64,13 @@ class NewVennDia(unittest.TestCase):
 
         # Now she inserts a file
         self.choosefile1input = self.browser.find_element_by_id("file1")
-        self.actionChains.context_click(self.choosefile1input).perform()
+        self.choosefile1input.send_keys(
+            '/media/raid_2009/User_Temp/Pietro/GI.xls'
+        )
+        # self.actionChains.context_click(self.choosefile1input).perform()
+        # script = """document.getElementById('file1')
+        #    .value='/media/raid_2009/User_Temp/Pietro/GI.xls';"""
+        # self.browser.execute_script(script)
 
         # She looks that the page charges the data of first excell
 
